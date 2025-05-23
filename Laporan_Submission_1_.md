@@ -78,12 +78,7 @@ Dua algoritma digunakan:
 - Kekurangan: Lebih kompleks, sulit diinterpretasi
 
 ### Model Terbaik
-Setelah model baseline dibuat, dilakukan hyperparameter tuning pada model Random Forest menggunakan GridSearchCV. 
-Parameter yang dituning meliputi:
-- n_estimators: [100, 150, 200]
-- max_depth: [None, 6, 8, 10]
-Tujuan dari tuning ini adalah untuk mencari kombinasi parameter terbaik guna meningkatkan performa model. 
-Hasil tuning menunjukkan bahwa kombinasi `n_estimators=150` dan `max_depth=8` memberikan performa terbaik pada data validasi.
+Model terbaik dipilih berdasarkan evaluasi performa dan keseimbangan metrik antar kelas. Model Random Forest Classifier dengan parameter default (tanpa tuning) dipilih sebagai model akhir karena memberikan performa terbaik secara keseluruhan.
  
 ## Evaluation
 Metrik yang digunakan:
@@ -94,8 +89,12 @@ Metrik yang digunakan:
 
 ### Hasil Evaluasi
 1. Logistik Regression
--
--
-3. Random Forest
--
-- 
+- Accuracy: 76%
+- Precision (class 1 / diabetes): 66%
+- Recall (class 1 / diabetes): 54% 
+- F1-score (class 1 / diabetes): 59%
+2. Random Forest
+- Accuracy: 78%
+- Precision (class 1 / diabetes): 73%
+- Recall (class 1 / diabetes): 59%
+- F1-score (class 1 / diabetes): 65%
