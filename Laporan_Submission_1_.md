@@ -77,6 +77,12 @@ Dua algoritma digunakan:
 - Kelebihan: Akurasi tinggi, robust terhadap outlier, tidak memerlukan scaling
 - Kekurangan: Lebih kompleks, sulit diinterpretasi
 
+### Hyperparameter Tuning
+Pada awalnya dilakukan tuning hyperparameter pada model Random Forest menggunakan GridSearchCV untuk mencari kombinasi parameter terbaik, dengan grid sebagai berikut:
+- n_estimators: [100, 150, 200]
+- max_depth: [None, 6, 8, 10]
+Namun, hasil evaluasi setelah tuning menunjukkan bahwa model justru mengalami penurunan performa, terutama pada recall kelas positif (penderita diabetes). Oleh karena itu, model akhir tetap menggunakan parameter default karena memberikan hasil yang lebih seimbang dan memuaskan.
+
 ### Model Terbaik
 Model terbaik dipilih berdasarkan evaluasi performa dan keseimbangan metrik antar kelas. Model Random Forest Classifier dengan parameter default (tanpa tuning) dipilih sebagai model akhir karena memberikan performa terbaik secara keseluruhan.
  
