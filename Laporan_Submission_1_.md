@@ -78,7 +78,12 @@ Dua algoritma digunakan:
 - Kekurangan: Lebih kompleks, sulit diinterpretasi
 
 ### Model Terbaik
-Random Forest dipilih sebagai model terbaik karena menghasilkan performa evaluasi yang lebih tinggi dibanding Logistic Regression.
+Setelah model baseline dibuat, dilakukan hyperparameter tuning pada model Random Forest menggunakan GridSearchCV. 
+Parameter yang dituning meliputi:
+- n_estimators: [100, 150, 200]
+- max_depth: [None, 6, 8, 10]
+Tujuan dari tuning ini adalah untuk mencari kombinasi parameter terbaik guna meningkatkan performa model. 
+Hasil tuning menunjukkan bahwa kombinasi `n_estimators=150` dan `max_depth=8` memberikan performa terbaik pada data validasi.
  
 ## Evaluation
 Metrik yang digunakan:
