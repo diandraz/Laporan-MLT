@@ -45,7 +45,7 @@ https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
 - Semua kolom memiliki nilai non-null secara teknis (tidak ada NaN), namun perlu evaluasi lanjutan terhadap nilai nol yang tidak logis.
 - Nilai Nol Tidak Logis (Implicit Missing Values)
 Meskipun tidak ada missing value secara eksplisit, beberapa fitur mengandung nilai nol yang secara medis tidak mungkin terjadi. Berikut fitur-fitur yang terpengaruh:
-  -Glucose memiliki 5 nilai nol.
+ -Glucose memiliki 5 nilai nol.
  -BloodPressure memiliki 35 nilai nol.
  -SkinThickness memiliki 227 nilai nol.
  -Insulin memiliki 374 nilai nol.
@@ -93,9 +93,9 @@ Dua algoritma digunakan:
 - Cara Kerja:
 Logistic Regression adalah algoritma klasifikasi linier yang memodelkan hubungan antara fitur dan probabilitas suatu kelas target. Algoritma ini menghitung kombinasi linier dari semua fitur dan kemudian mengubah hasilnya menggunakan fungsi sigmoid untuk menghasilkan nilai probabilitas antara 0 dan 1. Prediksi dibuat berdasarkan apakah probabilitas tersebut melewati ambang batas tertentu (biasanya 0.5). Logistic Regression sangat cocok untuk klasifikasi biner dan dapat memberikan interpretasi koefisien fitur terhadap prediksi.
 - Kelebihan :
- - Cepat dan efisien untuk dataset kecil hingga sedang.
- - Mudah diinterpretasi (koefisien mencerminkan pengaruh fitur).
- - Cocok sebagai baseline.
+     - Cepat dan efisien untuk dataset kecil hingga sedang.
+     - Mudah diinterpretasi (koefisien mencerminkan pengaruh fitur).
+     - Cocok sebagai baseline.
 - Kekurangan :
  - Tidak dapat menangani hubungan non-linear antar fitur secara langsung.
  - Performa menurun jika data tidak terdistribusi secara linier.
