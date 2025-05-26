@@ -125,13 +125,20 @@ Metrik yang digunakan:
 - F1-score: Harmonik rata-rata precision dan recall.
 
 ### Hasil Evaluasi
-1. Logistik Regression
-- Accuracy: 76%
-- Precision (class 1 / diabetes): 66%
-- Recall (class 1 / diabetes): 54% 
-- F1-score (class 1 / diabetes): 59%
-2. Random Forest
-- Accuracy: 78%
-- Precision (class 1 / diabetes): 73%
-- Recall (class 1 / diabetes): 59%
-- F1-score (class 1 / diabetes): 65%
+Model Logistic Regression menghasilkan akurasi sebesar 71%, precision sebesar 60%, recall sebesar 50%, dan f1-score sebesar 55% pada kelas positif (penderita diabetes).
+Model Random Forest Classifier, yang digunakan tanpa proses hyperparameter tuning, menunjukkan peningkatan performa dengan akurasi sebesar 76%, precision sebesar 68%, recall sebesar 59%, dan f1-score sebesar 63% pada kelas positif.
+
+Tujuan utama dari proyek ini adalah untuk mendeteksi potensi diabetes secara dini berdasarkan data medis sederhana. Dengan demikian, model yang dibangun diharapkan dapat:
+
+- Membantu tenaga medis membuat keputusan awal yang cepat dan berbasis data.
+
+- Mengurangi keterlambatan diagnosis yang berpotensi memperparah kondisi pasien.
+
+- Memberikan solusi yang efisien dan praktis untuk diterapkan dalam sistem pelayanan kesehatan.
+
+Model yang dikembangkan berhasil menjawab permasalahan tersebut. Logistic Regression, sebagai model baseline, sudah menunjukkan performa awal yang cukup baik, namun masih kesulitan dalam mendeteksi penderita diabetes (recall hanya 50%). Sebaliknya, Random Forest menunjukkan kinerja yang lebih seimbang antara mengenali pasien sehat dan pasien yang benar-benar menderita diabetes. Dengan recall sebesar 59%, Random Forest mampu menangkap lebih banyak kasus positif, yang sangat penting dalam konteks medis.
+
+Selain itu, meskipun model belum mencapai performa sempurna, hasil ini sudah cukup menunjukkan bahwa pendekatan machine learning dapat memberikan nilai tambah yang signifikan bagi pelayanan kesehatan, khususnya dalam mendukung deteksi dini penyakit kronis seperti diabetes.
+
+Insight Akhir
+Model Random Forest dipilih sebagai model terbaik karena memberikan performa paling stabil dan mendekati tujuan utama proyek, yaitu mendeteksi potensi diabetes secara akurat dan efisien. Dengan pengembangan lebih lanjut, seperti tuning parameter atau penambahan fitur medis yang lebih kompleks, model ini masih memiliki ruang untuk ditingkatkan.
