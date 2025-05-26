@@ -89,17 +89,33 @@ Karena : Nilai 0 dapat menurunkan kualitas model karena secara medis tidak mungk
 ## Modeling
 Dua algoritma digunakan:
 1. Logistic Regression (Baseline)
-- Parameter default digunakan.
-- Kelebihan: Cepat, mudah diinterpretasi, cocok untuk baseline.
-- Kekurangan: Kurang cocok jika hubungan fitur dengan target tidak linear.
+- Parameter default yang digunakan random_state=42.
+- Cara Kerja:
+Logistic Regression adalah algoritma klasifikasi linier yang memodelkan hubungan antara fitur dan probabilitas suatu kelas target. Algoritma ini menghitung kombinasi linier dari semua fitur dan kemudian mengubah hasilnya menggunakan fungsi sigmoid untuk menghasilkan nilai probabilitas antara 0 dan 1. Prediksi dibuat berdasarkan apakah probabilitas tersebut melewati ambang batas tertentu (biasanya 0.5). Logistic Regression sangat cocok untuk klasifikasi biner dan dapat memberikan interpretasi koefisien fitur terhadap prediksi.
+- Kelebihan :
+ - Cepat dan efisien untuk dataset kecil hingga sedang.
+ - Mudah diinterpretasi (koefisien mencerminkan pengaruh fitur).
+ - Cocok sebagai baseline.
+- Kekurangan :
+ - Tidak dapat menangani hubungan non-linear antar fitur secara langsung.
+ - Performa menurun jika data tidak terdistribusi secara linier.
+  
 2. Random Forest Classifier
-- Parameter awal: n_estimators=100, max_depth=None
-- Setelah hyperparameter tuning: n_estimators=150, max_depth=8
-- Kelebihan: Akurasi tinggi, robust terhadap outlier, tidak memerlukan scaling
-- Kekurangan: Lebih kompleks, sulit diinterpretasi
+- Parameter awal: n_estimators=100, max_depth=None, random_state=42
+- Cara Kerja:
+Random Forest adalah algoritma ensemble berbasis pohon keputusan. Ia membangun banyak pohon (decision tree) secara acak dari subset data dan subset fitur yang berbeda, lalu menggabungkan prediksinya melalui voting (untuk klasifikasi). Karena tidak semua data digunakan dalam satu pohon dan pemilihan fitur dilakukan secara acak, Random Forest mampu menangani overfitting lebih baik daripada pohon tunggal. Algoritma ini juga tidak memerlukan normalisasi data.
+- Kelebihan :
+ - Akurasi tinggi dan stabil.
+ - Tidak sensitif terhadap outlier dan scaling.
+ - Dapat menangani fitur kategorik dan numerik secara alami.
+- Kekurangan :
+ - Lebih kompleks dibanding model linier.
+ - Sulit diinterpretasikan secara langsung karena banyak pohon
 
 ### Model Terbaik
-Model terbaik dipilih berdasarkan evaluasi performa dan keseimbangan metrik antar kelas. Model Random Forest Classifier dengan parameter default (tanpa tuning) dipilih sebagai model akhir karena memberikan performa terbaik secara keseluruhan.
+Berdasarkan hasil evaluasi pada data uji, model Random Forest Classifier dengan parameter default menunjukkan performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression. Hal ini ditunjukkan oleh akurasi yang lebih tinggi, serta metrik recall dan f1-score yang lebih baik dalam mendeteksi kasus diabetes (kelas positif).
+
+Dengan demikian, Random Forest Classifier dipilih sebagai model akhir karena lebih mampu menangani kompleksitas data dan memberikan prediksi yang lebih seimbang antar kelas meskipun belum dilakukan tuning.
  
 ## Evaluation
 Metrik yang digunakan:
