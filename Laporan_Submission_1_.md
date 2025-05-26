@@ -79,8 +79,10 @@ Untuk memahami data lebih lanjut, dilakukan beberapa visualisasi berikut:
 
 ## Data Preparation
 - Mengganti nilai 0 pada fitur medis (Glucose, BloodPressure, SkinThickness, Insulin, dan BMI) dengan nilai median kolom tersebut.
-- Melakukan standardisasi data menggunakan StandardScaler.
+- Mengganti Nilai Nol dengan Median
+- Memisahkan Fitur dan Target
 - Membagi data menjadi training set dan testing set (80:20).
+- Melakukan standardisasi data menggunakan StandardScaler.
 
 Karena : Nilai 0 dapat menurunkan kualitas model karena secara medis tidak mungkin bernilai nol. Standardisasi diperlukan untuk membuat algoritma bekerja optimal, terutama pada model yang sensitif terhadap skala seperti Logistic Regression.
 
