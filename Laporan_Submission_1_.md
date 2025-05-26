@@ -45,7 +45,7 @@ https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
 - Semua kolom memiliki nilai non-null secara teknis (tidak ada NaN), namun perlu evaluasi lanjutan terhadap nilai nol yang tidak logis.
 - Nilai Nol Tidak Logis (Implicit Missing Values)
 Meskipun tidak ada missing value secara eksplisit, beberapa fitur mengandung nilai nol yang secara medis tidak mungkin terjadi. Berikut fitur-fitur yang terpengaruh:
- -Glucose memiliki 5 nilai nol.
+  -Glucose memiliki 5 nilai nol.
  -BloodPressure memiliki 35 nilai nol.
  -SkinThickness memiliki 227 nilai nol.
  -Insulin memiliki 374 nilai nol.
