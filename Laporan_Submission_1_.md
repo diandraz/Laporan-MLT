@@ -40,6 +40,36 @@ Dengan kemajuan teknologi dan ketersediaan data medis, pendekatan machine learni
 Dataset yang digunakan adalah Pima Indians Diabetes Database dari Kaggle:
 https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
 
+Dataset memiliki 768 baris dan 9 kolom, yang berarti berisi data 768 pasien wanita keturunan Indian Pima, dengan 8 fitur dan 1 target (Outcome).
+
+Terdiri dari 7 kolom integer dan 2 kolom float.
+
+Semua kolom memiliki nilai non-null secara teknis (tidak ada NaN), namun perlu evaluasi lanjutan terhadap nilai nol yang tidak logis.
+
+Nilai Nol Tidak Logis (Implicit Missing Values)
+Meskipun tidak ada missing value secara eksplisit, beberapa fitur mengandung nilai nol yang secara medis tidak mungkin terjadi. Berikut fitur-fitur yang terpengaruh:
+
+Glucose memiliki 5 nilai nol.
+
+BloodPressure memiliki 35 nilai nol.
+
+SkinThickness memiliki 227 nilai nol.
+
+Insulin memiliki 374 nilai nol.
+
+BMI memiliki 11 nilai nol.
+
+Nilai-nilai nol ini kemungkinan besar mewakili data yang hilang, dan perlu diimputasi (diganti dengan nilai median, mean, atau strategi lainnya). Sebaliknya, kolom Pregnancies memang wajar memiliki nol karena pasien bisa saja belum pernah hamil.
+
+Distribusi Label (Outcome)
+Dari 768 data, terdapat:
+
+500 data dengan label 0 (tidak menderita diabetes)
+
+268 data dengan label 1 (menderita diabetes)
+
+Artinya, kelas target tidak seimbang. Sekitar 65% data merupakan kelas negatif (tidak diabetes), dan 35% merupakan kelas positif (diabetes). Ketidakseimbangan ini perlu diperhatikan dalam proses training model agar tidak bias terhadap mayoritas kelas.
+
 ### Variabel-variabel pada dataset adalah sebagai berikut:
 - Pregnancies: Jumlah kehamilan
 - Glucose: Kadar glukosa dalam darah
