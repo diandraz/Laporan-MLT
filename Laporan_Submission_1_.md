@@ -45,11 +45,11 @@ https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
 - Semua kolom memiliki nilai non-null secara teknis (tidak ada NaN), namun perlu evaluasi lanjutan terhadap nilai nol yang tidak logis.
 - Nilai Nol Tidak Logis (Implicit Missing Values)
 Meskipun tidak ada missing value secara eksplisit, beberapa fitur mengandung nilai nol yang secara medis tidak mungkin terjadi. Berikut fitur-fitur yang terpengaruh:
- -Glucose memiliki 5 nilai nol.
- -BloodPressure memiliki 35 nilai nol.
- -SkinThickness memiliki 227 nilai nol.
- -Insulin memiliki 374 nilai nol.
- -BMI memiliki 11 nilai nol.
+     -Glucose memiliki 5 nilai nol.
+     -BloodPressure memiliki 35 nilai nol.
+     -SkinThickness memiliki 227 nilai nol.
+     -Insulin memiliki 374 nilai nol.
+     -BMI memiliki 11 nilai nol.
 
 Nilai-nilai nol ini kemungkinan besar mewakili data yang hilang, dan perlu diimputasi (diganti dengan nilai median, mean, atau strategi lainnya). Sebaliknya, kolom Pregnancies memang wajar memiliki nol karena pasien bisa saja belum pernah hamil.
 - Distribusi Label (Outcome)
@@ -97,20 +97,20 @@ Logistic Regression adalah algoritma klasifikasi linier yang memodelkan hubungan
      - Mudah diinterpretasi (koefisien mencerminkan pengaruh fitur).
      - Cocok sebagai baseline.
 - Kekurangan :
- - Tidak dapat menangani hubungan non-linear antar fitur secara langsung.
- - Performa menurun jika data tidak terdistribusi secara linier.
+     - Tidak dapat menangani hubungan non-linear antar fitur secara langsung.
+     - Performa menurun jika data tidak terdistribusi secara linier.
   
 2. Random Forest Classifier
 - Parameter awal: n_estimators=100, max_depth=None, random_state=42
 - Cara Kerja:
 Random Forest adalah algoritma ensemble berbasis pohon keputusan. Ia membangun banyak pohon (decision tree) secara acak dari subset data dan subset fitur yang berbeda, lalu menggabungkan prediksinya melalui voting (untuk klasifikasi). Karena tidak semua data digunakan dalam satu pohon dan pemilihan fitur dilakukan secara acak, Random Forest mampu menangani overfitting lebih baik daripada pohon tunggal. Algoritma ini juga tidak memerlukan normalisasi data.
 - Kelebihan :
- - Akurasi tinggi dan stabil.
- - Tidak sensitif terhadap outlier dan scaling.
- - Dapat menangani fitur kategorik dan numerik secara alami.
+     - Akurasi tinggi dan stabil.
+     - Tidak sensitif terhadap outlier dan scaling.
+     - Dapat menangani fitur kategorik dan numerik secara alami.
 - Kekurangan :
- - Lebih kompleks dibanding model linier.
- - Sulit diinterpretasikan secara langsung karena banyak pohon
+     - Lebih kompleks dibanding model linier.
+     - Sulit diinterpretasikan secara langsung karena banyak pohon
 
 ### Model Terbaik
 Berdasarkan hasil evaluasi pada data uji, model Random Forest Classifier dengan parameter default menunjukkan performa yang lebih baik secara keseluruhan dibandingkan Logistic Regression. Hal ini ditunjukkan oleh akurasi yang lebih tinggi, serta metrik recall dan f1-score yang lebih baik dalam mendeteksi kasus diabetes (kelas positif).
