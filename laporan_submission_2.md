@@ -115,5 +115,5 @@ MAE 0.67 menunjukkan bahwa secara rata-rata, prediksi menyimpang 0.67 dari nilai
 Hasil ini menunjukkan bahwa model cukup baik dalam memprediksi rating film yang akan diberikan pengguna, dengan kesalahan di bawah 1 poin. Metrik RMSE dan MAE juga konsisten menunjukkan bahwa model SVD dapat menangkap preferensi pengguna dengan cukup akurat.
 
 Sebagai perbandingan, pendekatan Content-Based Filtering tidak menghasilkan prediksi rating secara numerik, sehingga evaluasinya lebih kualitatif (berdasarkan relevansi subyektif hasil rekomendasi). Namun demikian, sistem ini tetap bermanfaat terutama dalam kondisi cold-start.
-**---Ini adalah bagian akhir laporan---**
+
 
