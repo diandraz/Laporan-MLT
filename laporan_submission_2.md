@@ -99,16 +99,16 @@ Dua pendekatan utama yang digunakan adalah:
 
 1. Content-Based Filtering (CBF)
 Pendekatan ini merekomendasikan film kepada pengguna berdasarkan kemiripan konten film yang telah mereka sukai sebelumnya.
-Implementasi:
-- Menggunakan kolom genres dari data movies.csv.
-- Dilakukan transformasi teks genre menjadi representasi vektor menggunakan TF-IDF.
-- Hitung kemiripan antar film menggunakan cosine similarity.
-- Diberikan rekomendasi film serupa berdasarkan genre film yang telah ditonton pengguna.
+- Implementasi:
+    - Menggunakan kolom genres dari data movies.csv.
+    - Dilakukan transformasi teks genre menjadi representasi vektor menggunakan TF-IDF.
+    - Hitung kemiripan antar film menggunakan cosine similarity.
+    - Diberikan rekomendasi film serupa berdasarkan genre film yang telah ditonton pengguna.
 
 2. Matrix Factorization - SVD
 Pendekatan collaborative filtering ini menggunakan interaksi pengguna terhadap film dalam bentuk matriks, lalu dilakukan dekomposisi matriks untuk menemukan pola laten antara pengguna dan item.
 
-Implementasi:
+- Implementasi:
 Menggunakan library Surprise untuk menerapkan algoritma SVD:
 
 
