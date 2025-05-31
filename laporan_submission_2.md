@@ -117,6 +117,3 @@ Hasil ini menunjukkan bahwa model cukup baik dalam memprediksi rating film yang 
 Sebagai perbandingan, pendekatan Content-Based Filtering tidak menghasilkan prediksi rating secara numerik, sehingga evaluasinya lebih kualitatif (berdasarkan relevansi subyektif hasil rekomendasi). Namun demikian, sistem ini tetap bermanfaat terutama dalam kondisi cold-start.
 **---Ini adalah bagian akhir laporan---**
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
