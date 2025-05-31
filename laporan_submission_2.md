@@ -38,6 +38,7 @@ Metode ini menggunakan pendekatan kolaboratif dengan menganalisis pola rating an
 Sebagai pembanding, digunakan juga pendekatan sederhana seperti memprediksi rata-rata rating film atau rata-rata rating pengguna untuk menilai seberapa jauh peningkatan performa dari model utama.
 
 ## Data Understanding
+Sumber data : https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset/data
 Dataset yang digunakan dalam proyek ini berasal dari MovieLens, tepatnya versi MovieLens 100k Dataset, yang berisi data rating film dari 943 pengguna terhadap 1682 film. Dataset ini cocok digunakan untuk membangun sistem rekomendasi dan tugas prediksi rating karena berisi lebih dari 100.000 entri rating yang bersifat kuantitatif. Dalam proyek ini, hanya dua file utama yang digunakan, yaitu:
 - movies.csv — berisi metadata film seperti ID film, judul, dan genre.
 - ratings.csv — berisi data rating dari pengguna terhadap film dengan timestamp.
@@ -79,11 +80,17 @@ Visualisasi seperti histogram distribusi rating, bar chart genre, dan heatmap us
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
 1. Merge Data
+Data film dan data rating pengguna digabungkan (merge) berdasarkan movieId agar setiap baris data memiliki informasi lengkap tentang judul film, serta rating yang diberikan pengguna. Ini penting untuk menggabungkan informasi fitur dan label dalam satu frame data.
 2. Handling Missing Values
+Dilakukan pengecekan dan penanganan nilai hilang (missing values) untuk mencegah error atau bias saat proses pelatihan model. Jika ada nilai kosong, biasanya dihapus atau diisi dengan nilai tertentu tergantung konteks dan jumlah yang hilang.
 3. Feature Engineering
+Dilakukan pembuatan fitur tambahan seperti tahun rilis film yang diekstrak dari judul. Fitur-fitur seperti ini dapat membantu model mengenali pola perilaku pengguna terhadap film berdasarkan waktu atau genre tertentu.
 4. Encoding Fitur Kategorikal
-5. Feature Selection
+Fitur-fitur kategorikal seperti genre atau userId diubah menjadi representasi numerik agar bisa digunakan oleh algoritma machine learning. Contohnya, userId dan movieId di-encode dengan Label Encoding untuk digunakan dalam model matrix factorization.
+5. Feature 
+Hanya fitur-fitur yang relevan seperti userId, movieId, dan rating yang dipertahankan untuk modeling. Fitur lain yang tidak berkontribusi terhadap prediksi rating disaring agar model menjadi lebih efisien.
 6. Train-Test Split
+Dataset dibagi menjadi data latih dan data uji untuk mengevaluasi performa model secara adil. Biasanya dilakukan dengan proporsi 80:20.
 
 ## Modeling
 Pada tahap ini, dilakukan penerapan dua pendekatan sistem rekomendasi untuk memprediksi rating yang diberikan pengguna terhadap film, dan menghasilkan Top-N Recommendation.
