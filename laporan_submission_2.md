@@ -39,7 +39,7 @@ Sebagai pembanding, digunakan juga pendekatan sederhana seperti memprediksi rata
 
 ## Data Understanding
 Sumber data : https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset/data
-Dataset yang digunakan dalam proyek ini berasal dari MovieLens, tepatnya versi MovieLens 100k Dataset, yang berisi data rating film dari 943 pengguna terhadap 1682 film. Dataset ini cocok digunakan untuk membangun sistem rekomendasi dan tugas prediksi rating karena berisi lebih dari 100.000 entri rating yang bersifat kuantitatif. Dalam proyek ini, hanya dua file utama yang digunakan, yaitu:
+Dataset yang digunakan dalam proyek ini berasal dari MovieLens 100k, tepatnya versi MovieLens 100k Dataset, yang berisi data rating film dari 943 pengguna terhadap 1682 film. Dataset ini cocok digunakan untuk membangun sistem rekomendasi dan tugas prediksi rating karena berisi lebih dari 100.000 entri rating yang bersifat kuantitatif. Dalam proyek ini, hanya dua file utama yang digunakan, yaitu:
 - movies.csv — berisi metadata film seperti ID film, judul, dan genre.
 - ratings.csv — berisi data rating dari pengguna terhadap film dengan timestamp.
 
