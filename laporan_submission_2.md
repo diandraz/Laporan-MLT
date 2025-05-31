@@ -6,10 +6,10 @@ Dalam era digital modern, pengguna platform streaming seperti Netflix, Disney+, 
 
 Proyek ini memanfaatkan data dari MovieLens yang terdiri atas informasi rating film dari pengguna untuk membangun model prediksi rating menggunakan pendekatan machine learning berbasis regresi. Algoritma Singular Value Decomposition (SVD) dipilih karena kemampuannya dalam melakukan dekomposisi matriks rating yang bersifat sparse, serta akurasi yang tinggi dalam memprediksi preferensi pengguna [2]. Dengan model ini, sistem dapat memperkirakan rating yang belum diberikan oleh pengguna terhadap suatu film, yang kemudian dapat digunakan untuk membuat rekomendasi yang lebih personal dan relevan. Studi oleh Netflix menunjukkan bahwa lebih dari 80% aktivitas menonton berasal dari sistem rekomendasi otomatis mereka [3], menunjukkan pentingnya akurasi dalam sistem prediksi seperti ini.z
 
-##Referensi:
-[1] F. Ricci, L. Rokach, and B. Shapira, Recommender Systems Handbook. Springer, 2015.
-[2] Y. Koren, R. Bell, and C. Volinsky, “Matrix Factorization Techniques for Recommender Systems,” Computer, vol. 42, no. 8, pp. 30–37, 2009.
-[3] C. A. Gomez-Uribe and N. Hunt, “The Netflix Recommender System: Algorithms, Business Value, and Innovation,” ACM Trans. Manage. Inf. Syst., vol. 6, no. 4, pp. 1–19, Dec. 2016.
+## Referensi:
+- [1] F. Ricci, L. Rokach, and B. Shapira, Recommender Systems Handbook. Springer, 2015.
+- [2] Y. Koren, R. Bell, and C. Volinsky, “Matrix Factorization Techniques for Recommender Systems,” Computer, vol. 42, no. 8, pp. 30–37, 2009.
+- [3] C. A. Gomez-Uribe and N. Hunt, “The Netflix Recommender System: Algorithms, Business Value, and Innovation,” ACM Trans. Manage. Inf. Syst., vol. 6, no. 4, pp. 1–19, Dec. 2016.
 
 ## Business Understanding
 
