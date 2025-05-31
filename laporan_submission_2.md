@@ -1,78 +1,120 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Muhammad Fadhil Diandra
 
 ## Project Overview
 
-Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Dalam era digital modern, pengguna platform streaming seperti Netflix, Disney+, dan Amazon Prime dihadapkan pada ribuan pilihan film dan serial, sehingga dibutuhkan sistem yang dapat membantu menyaring konten berdasarkan preferensi pengguna. Sistem rekomendasi hadir sebagai solusi penting untuk permasalahan ini. Dengan mempelajari pola rating pengguna terhadap film, sistem ini mampu memprediksi film apa yang kemungkinan besar akan disukai pengguna berikutnya. Salah satu pendekatan yang umum digunakan adalah collaborative filtering, di mana preferensi pengguna dipelajari dari interaksi pengguna lain yang memiliki selera serupa. Metode ini telah terbukti meningkatkan pengalaman pengguna dan efisiensi layanan digital [1].
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-- Format Referensi dapat mengacu pada penulisan sitasi [IEEE](https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf), [APA](https://www.mendeley.com/guides/apa-citation-guide/) atau secara umum seperti [di sini](https://penerbitdeepublish.com/menulis-buku-membuat-sitasi-dengan-mudah/)
-- Sumber yang bisa digunakan [Scholar](https://scholar.google.com/)
+Proyek ini memanfaatkan data dari MovieLens yang terdiri atas informasi rating film dari pengguna untuk membangun model prediksi rating menggunakan pendekatan machine learning berbasis regresi. Algoritma Singular Value Decomposition (SVD) dipilih karena kemampuannya dalam melakukan dekomposisi matriks rating yang bersifat sparse, serta akurasi yang tinggi dalam memprediksi preferensi pengguna [2]. Dengan model ini, sistem dapat memperkirakan rating yang belum diberikan oleh pengguna terhadap suatu film, yang kemudian dapat digunakan untuk membuat rekomendasi yang lebih personal dan relevan. Studi oleh Netflix menunjukkan bahwa lebih dari 80% aktivitas menonton berasal dari sistem rekomendasi otomatis mereka [3], menunjukkan pentingnya akurasi dalam sistem prediksi seperti ini.z
+
+##Referensi:
+[1] F. Ricci, L. Rokach, and B. Shapira, Recommender Systems Handbook. Springer, 2015.
+[2] Y. Koren, R. Bell, and C. Volinsky, “Matrix Factorization Techniques for Recommender Systems,” Computer, vol. 42, no. 8, pp. 30–37, 2009.
+[3] C. A. Gomez-Uribe and N. Hunt, “The Netflix Recommender System: Algorithms, Business Value, and Innovation,” ACM Trans. Manage. Inf. Syst., vol. 6, no. 4, pp. 1–19, Dec. 2016.
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
-Menjelaskan pernyataan masalah:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Bagaimana cara memprediksi rating yang akan diberikan pengguna terhadap film yang belum ditonton berdasarkan data historis rating yang tersedia?
+- Bagaimana meningkatkan kualitas sistem rekomendasi agar pengguna mendapatkan saran film yang sesuai dengan preferensinya, sehingga meningkatkan kepuasan dan retensi pengguna pada platform?2
+- Bagaimana memanfaatkan data rating yang tersedia untuk memahami preferensi pengguna terhadap genre atau jenis film tertentu?
 
 ### Goals
 
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
+- Membangun model machine learning berbasis regresi untuk memprediksi rating pengguna terhadap film yang belum ditonton.
+- Menghasilkan sistem rekomendasi berbasis rating prediktif agar pengguna mendapatkan rekomendasi film yang akurat dan personal.
+- Menganalisis pola rating untuk mendapatkan insight terhadap genre atau tipe film yang populer atau kurang diminati oleh kelompok pengguna tertentu.
 
 Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
+ 
+### Solution statements
+- Content-Based Filtering dengan Regressor
+Pendekatan ini memanfaatkan atribut film (seperti genre, tahun rilis, dll) dan preferensi pengguna berdasarkan histori film yang pernah ditonton untuk membangun model prediksi rating menggunakan algoritma regresi seperti Linear Regression atau Random Forest Regressor. Namun karena dalam dataset ini hanya tersedia data rating dan tidak lengkap untuk metadata film, pendekatan ini tidak digunakan pada implementasi utama.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
+- Collaborative Filtering dengan Matrix Factorization (SVD)
+Metode ini menggunakan pendekatan kolaboratif dengan menganalisis pola rating antar pengguna untuk menyarankan film yang mungkin disukai oleh pengguna lain dengan pola serupa. Algoritma seperti Singular Value Decomposition (SVD) menjadi solusi utama dalam proyek ini karena mampu menangkap hubungan laten antara pengguna dan film berdasarkan rating historis.
 
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+- Baseline Predictive Model
+Sebagai pembanding, digunakan juga pendekatan sederhana seperti memprediksi rata-rata rating film atau rata-rata rating pengguna untuk menilai seberapa jauh peningkatan performa dari model utama.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan dalam proyek ini berasal dari MovieLens, tepatnya versi MovieLens 100k Dataset, yang berisi data rating film dari 943 pengguna terhadap 1682 film. Dataset ini cocok digunakan untuk membangun sistem rekomendasi dan tugas prediksi rating karena berisi lebih dari 100.000 entri rating yang bersifat kuantitatif. Dalam proyek ini, hanya dua file utama yang digunakan, yaitu:
+- movies.csv — berisi metadata film seperti ID film, judul, dan genre.
+- ratings.csv — berisi data rating dari pengguna terhadap film dengan timestamp.
 
-Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Total data dalam ratings.csv adalah 100.836 entri rating, sedangkan movies.csv mencakup 9742 film, namun hanya sebagian yang memiliki rating (karena keterbatasan interaksi pengguna). Data ini telah memenuhi syarat minimum kuantitatif (>500 sampel) dan sangat relevan untuk pendekatan regresi dan sistem rekomendasi.
 
-Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+### Variabel dalam Dataset
+Berikut adalah penjelasan masing-masing fitur:
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data beserta insight atau exploratory data analysis.
+File: ratings.csv
+- userId : ID unik yang mewakili pengguna.
+- movieId : ID unik film yang diberikan rating.
+- rating : Skor rating dari pengguna terhadap film (rentang 0.5 hingga 5.0).
+- timestamp : Waktu (dalam format UNIX time) saat pengguna memberikan rating.
+
+File: movies.csv
+- movieId : ID unik film (kunci relasi ke ratings.csv).
+- title : Judul film (mengandung tahun rilis dalam tanda kurung).
+- genres : Daftar genre yang dikaitkan dengan film, dipisahkan oleh simbol |.
+
+### Exploratory Data Analysis (EDA):
+
+1. Distribusi Rating
+- Mayoritas rating berada di angka 3.0 hingga 4.0, dengan puncak di rating 4.0.
+- Ini menunjukkan adanya kecenderungan pengguna memberi nilai cukup tinggi pada film yang mereka pilih untuk ditonton.
+2. Jumlah Rating per Film
+- Terdapat ketimpangan jumlah rating: beberapa film populer menerima ratusan rating, sedangkan sebagian besar film hanya menerima sedikit rating.
+- Hal ini mengindikasikan pentingnya menangani sparsity data saat membangun model rekomendasi.
+3. Jumlah Rating per Pengguna
+- Sebagian besar pengguna memberikan antara 20 hingga 200 rating.
+- Variasi ini penting diperhatikan karena dapat mempengaruhi generalisasi model prediktif terhadap pengguna baru (cold-start problem).
+4. Genre Paling Umum
+- Genre seperti Drama, Comedy, dan Action termasuk yang paling sering muncul dalam dataset, menunjukkan preferensi umum pengguna.
+- Visualisasi seperti histogram distribusi rating, bar chart genre, dan heatmap user-movie matrix digunakan untuk membantu memahami tren dan struktur data secara lebih intuitif.
+
+Visualisasi seperti histogram distribusi rating, bar chart genre, dan heatmap user-movie matrix digunakan untuk membantu memahami tren dan struktur data secara lebih intuitif.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+1. Merge Data
+2. Handling Missing Values
+3. Feature Engineering
+4. Encoding Fitur Kategorikal
+5. Feature Selection
+6. Train-Test Split
 
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
+Pada tahap ini, dilakukan penerapan dua pendekatan sistem rekomendasi untuk memprediksi rating yang diberikan pengguna terhadap film, dan menghasilkan Top-N Recommendation.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+Dua pendekatan utama yang digunakan adalah:
+
+1. Content-Based Filtering (CBF)
+Pendekatan ini merekomendasikan film kepada pengguna berdasarkan kemiripan konten film yang telah mereka sukai sebelumnya.
+Implementasi:
+- Menggunakan kolom genres dari data movies.csv.
+- Dilakukan transformasi teks genre menjadi representasi vektor menggunakan TF-IDF.
+- Hitung kemiripan antar film menggunakan cosine similarity.
+- Diberikan rekomendasi film serupa berdasarkan genre film yang telah ditonton pengguna.
+
+2. Matrix Factorization - SVD
+Pendekatan collaborative filtering ini menggunakan interaksi pengguna terhadap film dalam bentuk matriks, lalu dilakukan dekomposisi matriks untuk menemukan pola laten antara pengguna dan item.
+
+Implementasi:
+Menggunakan library Surprise untuk menerapkan algoritma SVD:
+
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
+Dalam mengevaluasi performa sistem rekomendasi yang telah dibangun, digunakan dua metrik utama yang umum dipakai pada sistem rekomendasi prediktif, yaitu:
+- Root Mean Squared Error (RMSE)
+RMSE 0.87 menandakan bahwa rata-rata kesalahan prediksi model sekitar 0.87 poin pada skala - rating 0.5–5.0.
+- Mean Absolute Error (MAE)
+MAE 0.67 menunjukkan bahwa secara rata-rata, prediksi menyimpang 0.67 dari nilai rating aktual pengguna.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Hasil ini menunjukkan bahwa model cukup baik dalam memprediksi rating film yang akan diberikan pengguna, dengan kesalahan di bawah 1 poin. Metrik RMSE dan MAE juga konsisten menunjukkan bahwa model SVD dapat menangkap preferensi pengguna dengan cukup akurat.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
+Sebagai perbandingan, pendekatan Content-Based Filtering tidak menghasilkan prediksi rating secara numerik, sehingga evaluasinya lebih kualitatif (berdasarkan relevansi subyektif hasil rekomendasi). Namun demikian, sistem ini tetap bermanfaat terutama dalam kondisi cold-start.
 **---Ini adalah bagian akhir laporan---**
 
 _Catatan:_
