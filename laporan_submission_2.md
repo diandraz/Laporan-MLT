@@ -115,10 +115,11 @@ Visualisasi bar chart dibuat untuk membandingkan RMSE dan MAE dari ketiga model:
 - CBF belum dievaluasi dengan RMSE/MAE karena berbasis kesamaan konten, bukan prediksi rating.
 
 # Conclusion
-- Model SVD memberikan hasil terbaik dalam memprediksi preferensi pengguna berdasarkan histori rating.
-- Content-Based Filtering berguna terutama untuk mengatasi masalah cold-start, seperti saat pengguna baru belum memiliki histori.
-- Baseline memberikan gambaran awal tapi tidak cukup akurat.
-- Hybrid System dengan menggabungkan SVD dan CBF dapat menjadi pendekatan yang lebih lengkap dan fleksibel di masa depan.
+- SVD adalah model dengan performa terbaik dalam memprediksi rating pengguna.
+- Baseline berguna sebagai pembanding sederhana, namun memiliki error lebih tinggi.
+- CBF tidak menghasilkan prediksi rating numerik, namun efektif merekomendasikan film serupa berdasarkan konten.
+
+Kombinasi antara SVD dan CBF berpotensi membentuk hybrid recommendation system yang lebih kuat, terutama dalam mengatasi permasalahan cold start untuk pengguna atau item baru.
 
 
 
