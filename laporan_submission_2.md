@@ -6,7 +6,7 @@ Dalam era digital saat ini, platform streaming seperti Netflix, Disney+, dan Ama
 
 Salah satu pendekatan populer adalah collaborative filtering, yaitu mempelajari interaksi pengguna dan menemukan kesamaan perilaku dengan pengguna lain. Dalam proyek ini, pendekatan matrix factorization menggunakan algoritma Singular Value Decomposition (SVD) diterapkan untuk memprediksi rating film yang belum ditonton pengguna. SVD dipilih karena kemampuannya mengatasi matriks yang sparse dan memberikan hasil prediksi yang akurat [2].
 
-Model ini dibangun menggunakan data dari MovieLens 100k yang menyediakan lebih dari 100.000 rating pengguna terhadap film. Output model berupa prediksi rating akan digunakan untuk memberikan rekomendasi film yang bersifat personal dan relevan bagi setiap pengguna. Studi oleh Netflix menunjukkan bahwa lebih dari 80% aktivitas menonton berasal dari sistem rekomendasi otomatis mereka [3], memperkuat pentingnya sistem seperti ini dalam meningkatkan pengalaman pengguna.
+Model ini dibangun menggunakan data dari MovieLens yang menyediakan lebih dari 100.000 rating pengguna terhadap film. Output model berupa prediksi rating akan digunakan untuk memberikan rekomendasi film yang bersifat personal dan relevan bagi setiap pengguna. Studi oleh Netflix menunjukkan bahwa lebih dari 80% aktivitas menonton berasal dari sistem rekomendasi otomatis mereka [3], memperkuat pentingnya sistem seperti ini dalam meningkatkan pengalaman pengguna.
 
 ## Referensi:
 - [1] F. Ricci, L. Rokach, and B. Shapira, Recommender Systems Handbook. Springer, 2015.
@@ -61,7 +61,16 @@ File: movies.csv
 - title : Judul film (mengandung tahun rilis dalam tanda kurung).
 - genres : Daftar genre yang dikaitkan dengan film, dipisahkan oleh simbol |.
 
-### Exploratory Data Analysis (EDA):
+## Data Preparation
+Sebelum modeling, kita perlu menggabungkan data rating dengan data film agar tiap entri rating juga membawa informasi judul dan genre:
+data_merged = pd.merge(ratings, movies, on='movieId')
+data_merged.head()
+pd.merge(ratings, movies, on='movieId') menggabungkan baris‐baris dari ratings dan movies berdasarkan kolom movieId yang sama.
+
+Hasilnya, data_merged memiliki kolom:
+[userId, movieId, rating, timestamp, title, genres]
+
+## Exploratory Data Analysis (EDA):
 
 1. Distribusi Rating
 - Mayoritas rating berada di kisaran 3.0–4.0, dengan puncak di sekitar 3.5–4.0.
@@ -75,28 +84,41 @@ Visualisasi yang digunakan:
 - Bar Chart 10 Film dengan Jumlah Rating Terbanyak
 - Histogram Jumlah Rating per Pengguna
 
-## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+## Data Preparation untuk Suprise
+Digunakan Reader dari Surprise untuk mendefinisikan skala rating (0.5 hingga 5.0), lalu dataset diubah ke format Surprise dan dilakukan split menjadi trainset dan testset dengan rasio 80:20.
 
-Library Surprise memerlukan format khusus: tiga kolom (userId, movieId, rating) beserta objek Reader untuk mendefinisikan rentang rating.
 
-## Modeling
-Model SVD digunakan untuk mempelajari pola laten interaksi pengguna–film dari matriks rating yang sangat sparse.
+## Modeling: Collaborative Filtering dengan SVD
+Model SVD dilatih menggunakan data training, lalu digunakan untuk memprediksi pada testset. Evaluasi dilakukan menggunakan:
+- RMSE: 0.8156
+- MAE: 0.6235
 
-model = SVD()
-model.fit(trainset)
-predictions = model.test(testset)
+Model SVD juga digunakan untuk menghasilkan top-N recommendation, contohnya rekomendasi untuk userId 1 berdasarkan estimasi rating tertinggi.
 
+## Modeling: Content-Based Filtering (CBF)
+Model ini bekerja dengan menghitung kesamaan antar film berdasarkan fitur genres menggunakan TF-IDF vectorization dan cosine similarity.
+
+Rekomendasi diberikan berdasarkan film yang mirip dengan film yang dipilih pengguna. Contohnya, film yang mirip dengan "Toy Story (1995)" direkomendasikan berdasarkan kemiripan genre.
+
+##  Baseline Predictive Model
+
+Model baseline digunakan sebagai pembanding, dengan pendekatan sederhana yaitu memprediksi rating berdasarkan rata-rata rating setiap film. Evaluasi:
+- RMSE: 0.9344
+- MAE: 0.7274
+
+Nilai error ini lebih tinggi dibandingkan model SVD, menunjukkan baseline kurang akurat.
 
 ## Evaluation
-Dua metrik yang dihitung: Root Mean Squared Error (RMSE) dan Mean Absolute Error (MAE).
+Visualisasi bar chart dibuat untuk membandingkan RMSE dan MAE dari ketiga model:
+- SVD unggul dengan error paling rendah.
+- Baseline sebagai acuan sederhana.
+- CBF belum dievaluasi dengan RMSE/MAE karena berbasis kesamaan konten, bukan prediksi rating.
 
-rmse = accuracy.rmse(predictions)  
-- RMSE: 0.8156
-mae  = accuracy.mae(predictions)
-- MAE : 0.6235
+# Conclusion
+- Model SVD memberikan hasil terbaik dalam memprediksi preferensi pengguna berdasarkan histori rating.
+- Content-Based Filtering berguna terutama untuk mengatasi masalah cold-start, seperti saat pengguna baru belum memiliki histori.
+- Baseline memberikan gambaran awal tapi tidak cukup akurat.
+- Hybrid System dengan menggabungkan SVD dan CBF dapat menjadi pendekatan yang lebih lengkap dan fleksibel di masa depan.
 
-Hasil ini menunjukkan bahwa model cukup baik dalam memprediksi rating film yang akan diberikan pengguna, dengan kesalahan di bawah 1 poin. Metrik RMSE dan MAE juga konsisten menunjukkan bahwa model SVD dapat menangkap preferensi pengguna dengan cukup akurat.
 
-Dengan menambahkan CBF dan Baseline Predictive Model, laporanmu menjadi lebih lengkap dan kuat secara metodologi. Kamu bisa juga bandingkan hasil evaluasinya (RMSE & MAE) dengan model SVD sebelumnya.
 
