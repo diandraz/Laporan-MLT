@@ -62,13 +62,17 @@ File: movies.csv
 - genres : Daftar genre yang dikaitkan dengan film, dipisahkan oleh simbol |.
 
 ## Data Preparation
-Sebelum modeling, kita perlu menggabungkan data rating dengan data film agar tiap entri rating juga membawa informasi judul dan genre:
+- Sebelum modeling, kita perlu menggabungkan data rating dengan data film agar tiap entri rating juga membawa informasi judul dan genre:
 data_merged = pd.merge(ratings, movies, on='movieId')
 data_merged.head()
 pd.merge(ratings, movies, on='movieId') menggabungkan baris‐baris dari ratings dan movies berdasarkan kolom movieId yang sama.
 
 Hasilnya, data_merged memiliki kolom:
 [userId, movieId, rating, timestamp, title, genres]
+
+- Menggunakan Reader() dari library Surprise untuk menetapkan skala rating.
+
+- Dataset dibagi menjadi trainset dan testset (80:20).
 
 ## Exploratory Data Analysis (EDA):
 
@@ -84,42 +88,40 @@ Visualisasi yang digunakan:
 - Bar Chart 10 Film dengan Jumlah Rating Terbanyak
 - Histogram Jumlah Rating per Pengguna
 
-## Data Preparation untuk Suprise
-Digunakan Reader dari Surprise untuk mendefinisikan skala rating (0.5 hingga 5.0), lalu dataset diubah ke format Surprise dan dilakukan split menjadi trainset dan testset dengan rasio 80:20.
-
 
 ## Modeling: Collaborative Filtering dengan SVD
-Model SVD dilatih menggunakan data training, lalu digunakan untuk memprediksi pada testset. Evaluasi dilakukan menggunakan:
-- RMSE: 0.8156
-- MAE: 0.6235
+Algoritma: Singular Value Decomposition dari pustaka Surprise.
 
-Model SVD juga digunakan untuk menghasilkan top-N recommendation, contohnya rekomendasi untuk userId 1 berdasarkan estimasi rating tertinggi.
+Pelatihan model dilakukan pada trainset, lalu diuji pada testset.
+Evaluasi performa:
+- RMSE: 0.8193
+- MAE: 0.6265
+
+Contoh penggunaan: rekomendasi top-N untuk userId=1.
 
 ## Modeling: Content-Based Filtering (CBF)
-Model ini bekerja dengan menghitung kesamaan antar film berdasarkan fitur genres menggunakan TF-IDF vectorization dan cosine similarity.
-
-Rekomendasi diberikan berdasarkan film yang mirip dengan film yang dipilih pengguna. Contohnya, film yang mirip dengan "Toy Story (1995)" direkomendasikan berdasarkan kemiripan genre.
+Menggunakan TF-IDF Vectorizer untuk merepresentasikan fitur genres.
+Menghitung cosine similarity antar film.
+Rekomendasi diberikan berdasarkan film yang mirip secara genre, contoh:
+- Film mirip dengan "Toy Story (1995)".
 
 ##  Baseline Predictive Model
+Strategi: memprediksi rating menggunakan rata-rata rating film.
+Evaluasi performa:
+- RMSE: 0.9332593915343897
+- MAE: 0.7259228114918184
 
-Model baseline digunakan sebagai pembanding, dengan pendekatan sederhana yaitu memprediksi rating berdasarkan rata-rata rating setiap film. Evaluasi:
-- RMSE: 0.9344
-- MAE: 0.7274
-
-Nilai error ini lebih tinggi dibandingkan model SVD, menunjukkan baseline kurang akurat.
+Error lebih tinggi dibanding model SVD, namun berguna sebagai acuan dasar.
 
 ## Evaluation
 Visualisasi bar chart dibuat untuk membandingkan RMSE dan MAE dari ketiga model:
-- SVD unggul dengan error paling rendah.
-- Baseline sebagai acuan sederhana.
-- CBF belum dievaluasi dengan RMSE/MAE karena berbasis kesamaan konten, bukan prediksi rating.
+- SVD menunjukkan performa terbaik dalam hal prediksi numerik rating.
+- CBF tidak dievaluasi menggunakan RMSE/MAE karena bersifat non-prediktif (berbasis kesamaan konten).
 
 # Conclusion
-- SVD adalah model dengan performa terbaik dalam memprediksi rating pengguna.
-- Baseline berguna sebagai pembanding sederhana, namun memiliki error lebih tinggi.
-- CBF tidak menghasilkan prediksi rating numerik, namun efektif merekomendasikan film serupa berdasarkan konten.
-
-Kombinasi antara SVD dan CBF berpotensi membentuk hybrid recommendation system yang lebih kuat, terutama dalam mengatasi permasalahan cold start untuk pengguna atau item baru.
-
+- SVD adalah model terbaik untuk memprediksi rating pengguna karena memiliki RMSE dan MAE paling rendah.
+- Content-Based Filtering tidak memprediksi rating numerik, tetapi sangat berguna untuk kasus cold-start (pengguna baru atau film baru).
+- Baseline digunakan sebagai model referensi awal.
+- Kombinasi SVD dan CBF berpotensi membentuk hybrid recommendation system yang lebih kuat dan adaptif terhadap berbagai kondisi pengguna.
 
 
