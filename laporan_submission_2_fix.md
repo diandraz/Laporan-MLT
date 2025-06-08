@@ -40,8 +40,8 @@ Sebagai pembanding, digunakan model sederhana seperti rata-rata rating film atau
 
 ## Data Understanding
 Sumber data : https://www.kaggle.com/datasets/grouplens/movielens-20m-dataset
-- movie.csv (≈27.278 baris) berisi kolom movieId, title, dan genres.
-- rating.csv (≈2.369.902 baris) berisi kolom userId, movieId, rating, dan timestamp
+- movie.csv (27278 baris) berisi kolom movieId, title, dan genres.
+- rating.csv (2.003.488 baris) berisi kolom userId, movieId, rating, dan timestamp
 
 Hasil pemeriksaan:
 - Tidak terdapat missing value di kedua file.
@@ -69,6 +69,10 @@ pd.merge(ratings, movies, on='movieId') menggabungkan baris‐baris dari ratings
 
 Hasilnya, data_merged memiliki kolom:
 [userId, movieId, rating, timestamp, title, genres]
+
+- Proses vektorisasi terhadap kolom 'genres' menggunakan metode TF-IDF (Term Frequency-Inverse Document Frequency). Teknik ini digunakan untuk mengubah nilai teks pada genre menjadi representasi numerik dalam bentuk matriks. Representasi ini memungkinkan pengukuran kemiripan antar film berdasarkan kesamaan genre.
+
+- Proses ini dilakukan menggunakan TfidfVectorizer dari library sklearn.feature_extraction.text dengan parameter stop_words='english' untuk menghapus kata-kata umum dalam Bahasa Inggris yang tidak bermakna penting (seperti "the", "and", dll).
 
 - Menggunakan Reader() dari library Surprise untuk menetapkan skala rating.
 
@@ -114,14 +118,34 @@ Evaluasi performa:
 Error lebih tinggi dibanding model SVD, namun berguna sebagai acuan dasar.
 
 ## Evaluation
-Visualisasi bar chart dibuat untuk membandingkan RMSE dan MAE dari ketiga model:
-- SVD menunjukkan performa terbaik dalam hal prediksi numerik rating.
-- CBF tidak dievaluasi menggunakan RMSE/MAE karena bersifat non-prediktif (berbasis kesamaan konten).
+Evaluasi dilakukan menggunakan metrik yang sesuai untuk masing-masing jenis model, yaitu RMSE (Root Mean Square Error) dan MAE (Mean Absolute Error) untuk model prediktif seperti SVD dan Baseline, serta Precision@10 dan Recall@10 untuk model non-prediktif seperti Content-Based Filtering.
+
+1. SVD (Singular Value Decomposition)
+Model SVD menunjukkan performa terbaik dalam memprediksi rating numerik. Hasil evaluasinya adalah sebagai berikut:
+
+- RMSE: 0.8193
+
+- MAE: 0.6265
+
+2. Baseline Model
+Model ini digunakan sebagai pembanding dasar (benchmark) dan menghasilkan performa yang lebih rendah dibandingkan SVD:
+
+- RMSE: 0.9333
+
+- MAE: 0.7259
+
+3. Content-Based Filtering (CBF)
+Karena Content-Based Filtering tidak memprediksi nilai rating secara langsung, model ini dievaluasi menggunakan metrik Precision@10 dan Recall@10, yang mengukur relevansi rekomendasi terhadap pengguna. Hasil evaluasinya adalah:
+
+- Precision@10: 0.0000
+
+- Recall@10: 0.0000
+
+Nilai evaluasi yang rendah pada CBF menunjukkan bahwa model ini belum mampu menghasilkan rekomendasi yang relevan untuk pengguna dalam top-10 item yang disarankan.
 
 # Conclusion
-- SVD adalah model terbaik untuk memprediksi rating pengguna karena memiliki RMSE dan MAE paling rendah.
-- Content-Based Filtering tidak memprediksi rating numerik, tetapi sangat berguna untuk kasus cold-start (pengguna baru atau film baru).
-- Baseline digunakan sebagai model referensi awal.
-- Kombinasi SVD dan CBF berpotensi membentuk hybrid recommendation system yang lebih kuat dan adaptif terhadap berbagai kondisi pengguna.
+- SVD memiliki nilai error yang paling rendah, menunjukkan kemampuannya dalam memprediksi rating pengguna dengan baik.
 
+- Baseline Model memberikan hasil yang kurang akurat dibandingkan SVD.
 
+- CBF tidak dievaluasi menggunakan RMSE/MAE karena bersifat non-prediktif
