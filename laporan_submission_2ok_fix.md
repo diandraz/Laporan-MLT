@@ -66,6 +66,8 @@ File: movies.csv
 data_merged = pd.merge(ratings, movies, on='movieId')
 data_merged.head()
 pd.merge(ratings, movies, on='movieId') menggabungkan baris‐baris dari ratings dan movies berdasarkan kolom movieId yang sama.
+-Menggunakan TF-IDF Vectorizer untuk merepresentasikan fitur genres.
+Menghitung cosine similarity antar film.
 
 Hasilnya, data_merged memiliki kolom:
 [userId, movieId, rating, timestamp, title, genres]
@@ -101,13 +103,33 @@ Evaluasi performa:
 - RMSE: 0.8193
 - MAE: 0.6265
 
-Contoh penggunaan: rekomendasi top-N untuk userId=1.
+Berikut hasil yang ditampilkan rekomendasi top-N untuk userId=1. :
+
+Rekomendasi untuk User 1:
+ ['Terminator 2: Judgment Day (1991)' 'Die Hard (1988)'
+ 'E.T. the Extra-Terrestrial (1982)' 'Ran (1985)'
+ 'Dead Poets Society (1989)' 'Sling Blade (1996)'
+ 'Untouchables, The (1987)'
+ 'Star Wars: Episode I - The Phantom Menace (1999)'
+ 'Lost Boys, The (1987)'
+ "Harry Potter and the Sorcerer's Stone (a.k.a. Harry Potter and the Philosopher's Stone) (2001)"]
+
 
 ## Modeling: Content-Based Filtering (CBF)
-Menggunakan TF-IDF Vectorizer untuk merepresentasikan fitur genres.
-Menghitung cosine similarity antar film.
-Rekomendasi diberikan berdasarkan film yang mirip secara genre, contoh:
-- Film mirip dengan "Toy Story (1995)".
+Rekomendasi diberikan berdasarkan film yang mirip secara genre, berikut hasil yang ditampilkan :
+CBF - Rekomendasi berdasarkan 'Toy Story (1995)':
+1. Antz (1998)
+2. Toy Story 2 (1999)
+3. Adventures of Rocky and Bullwinkle, The (2000)
+4. Emperor's New Groove, The (2000)
+5. Monsters, Inc. (2001)
+6. DuckTales: The Movie - Treasure of the Lost Lamp (1990)
+7. Wild, The (2006)
+8. Shrek the Third (2007)
+9. Tale of Despereaux, The (2008)
+10. Asterix and the Vikings (Astérix et les Vikings) (2006)
+
+Menggunakan Top N recomendation merekomendasikan film yang mirip dengan toy story sebanyak 10 film.
 
 ##  Baseline Predictive Model
 Strategi: memprediksi rating menggunakan rata-rata rating film.
